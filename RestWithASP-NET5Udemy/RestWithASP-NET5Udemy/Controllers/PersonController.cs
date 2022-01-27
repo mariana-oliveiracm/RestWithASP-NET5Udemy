@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestWithASP_NET5Udemy.Model;
-using RestWithASP_NET5Udemy.Services.Implementations;
-using System;
+using RestWithASP_NET5Udemy.Business;
 
 namespace RestWithASP_NET5Udemy.Controllers
 {
@@ -14,9 +13,9 @@ namespace RestWithASP_NET5Udemy.Controllers
     {
 
         private readonly ILogger<PersonController> _logger;
-        private IPersonService _personService;
+        private IPersonBusiness _personService;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personService)
         {
             _logger = logger;
             _personService = personService;

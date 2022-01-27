@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 
 
-namespace RestWithASP_NET5Udemy.Services.Implementations
+namespace RestWithASP_NET5Udemy.Business
 {
-    public interface IPersonService
+    public interface IPersonBusiness
     {
         Person Create(Person person);
         Person FindById(long id);

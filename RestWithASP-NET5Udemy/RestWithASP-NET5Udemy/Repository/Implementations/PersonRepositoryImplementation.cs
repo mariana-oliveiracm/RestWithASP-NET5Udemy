@@ -3,17 +3,16 @@ using RestWithASP_NET5Udemy.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace RestWithASP_NET5Udemy.Services.Implementations
+
+namespace RestWithASP_NET5Udemy.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
         //private volatile int count;
         private SqlContext _context;
 
-        public PersonServiceImplementation(SqlContext context)
+        public PersonRepositoryImplementation(SqlContext context)
         {
             _context = context;
         }
