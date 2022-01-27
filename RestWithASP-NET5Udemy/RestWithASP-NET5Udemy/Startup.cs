@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RestWithASP_NET5Udemy.Model.Context;
 using RestWithASP_NET5Udemy.Services.Implementations;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,9 @@ namespace RestWithASP_NET5Udemy
         {
 
             services.AddControllers();
+            services.AddDbContext<SqlContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SqlContext")));
+
             services.AddScoped<IPersonService, PersonServiceImplementation>();
         }
 
