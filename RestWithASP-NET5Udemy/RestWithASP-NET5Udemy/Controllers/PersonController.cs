@@ -8,7 +8,8 @@ namespace RestWithASP_NET5Udemy.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonController : Controller
     {
 

@@ -33,6 +33,7 @@ namespace RestWithASP_NET5Udemy
             services.AddDbContext<SqlContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SqlContext")));
 
+            services.AddApiVersioning();
             services.AddScoped<IPersonService, PersonServiceImplementation>();
         }
 
