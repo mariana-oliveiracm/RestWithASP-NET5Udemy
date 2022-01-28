@@ -1,16 +1,17 @@
-﻿using System;
+﻿using RestWithASP_NET5Udemy.Model.Base;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestWithASP_NET5Udemy.Model
 {
+
     [Table("books")]
-    public class Book
+    public class Book : BaseEntity
     {
-        [Column("id")]
-        public long Id { get; set; }
+
         [Column("title")]
         public string Title { get; set; }
-        
+
         [Column("author")]
         public string Author { get; set; }
 
@@ -21,7 +22,28 @@ namespace RestWithASP_NET5Udemy.Model
         public DateTime LaunchDate { get; set; }
 
     }
-}
+
+
+
+        /*[Table("books")]
+        public class Book
+        {
+            [Column("id")]
+            public long Id { get; set; }
+            [Column("title")]
+            public string Title { get; set; }
+
+            [Column("author")]
+            public string Author { get; set; }
+
+            [Column("price")]
+            public decimal Price { get; set; }
+
+            [Column("launch_date")]
+            public DateTime LaunchDate { get; set; }
+
+        }*/
+    }
 /*CREATE TABLE books (
   id  BIGINT NOT NULL IDENTITY(1,1) PRIMARY KEY,
   author varchar(100) NOT NULL,

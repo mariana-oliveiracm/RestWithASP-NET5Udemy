@@ -9,8 +9,8 @@ using RestWithASP_NET5Udemy.Model.Context;
 using RestWithASP_NET5Udemy.Business.Implementations;
 using RestWithASP_NET5Udemy.Business;
 using RestWithASP_NET5Udemy.Repository;
-using RestWithASP_NET5Udemy.Repository.Implementations;
 using Serilog;
+using RestWithASP_NET5Udemy.Repository.Generic;
 
 namespace RestWithASP_NET5Udemy
 {
@@ -34,9 +34,10 @@ namespace RestWithASP_NET5Udemy
 
             services.AddApiVersioning();
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
+            //services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+            //services.AddScoped<IBookRepository, BookRepositoryImplementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
