@@ -1,4 +1,6 @@
-﻿using RestWithASP_NET5Udemy.Model;
+﻿using RestWithASP_NET5Udemy.Data.Converter.Implementations;
+using RestWithASP_NET5Udemy.Data.VO;
+using RestWithASP_NET5Udemy.Model;
 using RestWithASP_NET5Udemy.Model.Context;
 using RestWithASP_NET5Udemy.Repository;
 using System;
@@ -9,18 +11,20 @@ namespace RestWithASP_NET5Udemy.Business.Implementations
 {
     public class BookBusinessImplementation : IBookBusiness
     {
-        //private volatile int count;
-        //private readonly IBookRepository _repository;
         private readonly IRepository<Book> _repository;
+        private readonly BookConverter _converter;
 
         public BookBusinessImplementation(IRepository<Book> repository)
         {
             _repository = repository;
+            _converter = new BookConverter();
         }
 
-        public Book Create(Book book)
+        public BookVO Create(BookVO book)
         {
-            return _repository.Create(book);
+            var bookEntity = _converter.Parse(book);
+            bookEntity = _repository.Create(bookEntity);
+            return _converter.Parse(bookEntity);
 
         }
 
@@ -29,19 +33,57 @@ namespace RestWithASP_NET5Udemy.Business.Implementations
             _repository.Delete(id);
         }
 
-        public List<Book> FindAll()
+        public List<BookVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.Parse(_repository.FindAll());
         }
 
-        public Book FindById(long id)
+        public BookVO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
 
         }
-        public Book Update(Book book)
+        public BookVO Update(BookVO book)
         {
-            return _repository.Update(book);
+            var bookEntity = _converter.Parse(book);
+            bookEntity = _repository.Update(bookEntity);
+            return _converter.Parse(bookEntity);
         }
+
+
+        ////private volatile int count;
+        ////private readonly IBookRepository _repository;
+        //private readonly IRepository<Book> _repository;
+
+        //public BookBusinessImplementation(IRepository<Book> repository)
+        //{
+        //    _repository = repository;
+        //}
+
+        //public Book Create(Book book)
+        //{
+        //    return _repository.Create(book);
+
+        //}
+
+        //public void Delete(long id)
+        //{
+        //    _repository.Delete(id);
+        //}
+
+        //public List<Book> FindAll()
+        //{
+        //    return _repository.FindAll();
+        //}
+
+        //public Book FindById(long id)
+        //{
+        //    return _repository.FindById(id);
+
+        //}
+        //public Book Update(Book book)
+        //{
+        //    return _repository.Update(book);
+        //}
     }
 }
