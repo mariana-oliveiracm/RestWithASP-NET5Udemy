@@ -11,6 +11,7 @@ using RestWithASP_NET5Udemy.Business;
 using RestWithASP_NET5Udemy.Repository;
 using Serilog;
 using RestWithASP_NET5Udemy.Repository.Generic;
+using Microsoft.Net.Http.Headers;
 
 namespace RestWithASP_NET5Udemy
 {
@@ -31,6 +32,13 @@ namespace RestWithASP_NET5Udemy
             var connection = Configuration.GetConnectionString("SqlContext");
             services.AddDbContext<SqlContext>(options =>
                     options.UseSqlServer(connection));
+
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+            }).AddXmlSerializerFormatters();
 
             services.AddApiVersioning();
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
