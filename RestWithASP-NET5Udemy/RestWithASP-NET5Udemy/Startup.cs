@@ -12,6 +12,8 @@ using RestWithASP_NET5Udemy.Repository;
 using Serilog;
 using RestWithASP_NET5Udemy.Repository.Generic;
 using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace RestWithASP_NET5Udemy
 {
@@ -41,6 +43,23 @@ namespace RestWithASP_NET5Udemy
             }).AddXmlSerializerFormatters();
 
             services.AddApiVersioning();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "REST API's from 0 to azure with ASP.NET Core 5 and Docker",
+                    Version = "v1",
+                    Description = "API RESTful developed in course",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Mariana Oliveira",
+                        Url = new System.Uri("https://github.com/mariana-oliveiracm")
+                    }
+                }); ;
+            });
+
+
+
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             //services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
@@ -59,6 +78,16 @@ namespace RestWithASP_NET5Udemy
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "REST API's course");
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
 
             app.UseAuthorization();
 

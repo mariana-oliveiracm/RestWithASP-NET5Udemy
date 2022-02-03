@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using RestWithASP_NET5Udemy.Model;
 using RestWithASP_NET5Udemy.Business;
 using RestWithASP_NET5Udemy.Data.VO;
+using System.Collections.Generic;
 
 namespace RestWithASP_NET5Udemy.Controllers
 {
@@ -23,6 +24,10 @@ namespace RestWithASP_NET5Udemy.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
@@ -30,6 +35,10 @@ namespace RestWithASP_NET5Udemy.Controllers
 
 
         [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindById(id);
@@ -38,6 +47,9 @@ namespace RestWithASP_NET5Udemy.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         //public IActionResult Post([FromBody] Person person)
         public IActionResult Post([FromBody] PersonVO person)
         {
@@ -46,6 +58,9 @@ namespace RestWithASP_NET5Udemy.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         //public IActionResult Put([FromBody] Person person)
         public IActionResult Put([FromBody] PersonVO person)
         {
@@ -54,6 +69,9 @@ namespace RestWithASP_NET5Udemy.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Delete(long id)
         {
             _personBusiness.Delete(id);
