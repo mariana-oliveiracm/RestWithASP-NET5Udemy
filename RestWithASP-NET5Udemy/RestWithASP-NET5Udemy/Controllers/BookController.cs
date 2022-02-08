@@ -3,12 +3,14 @@ using Microsoft.Extensions.Logging;
 using RestWithASP_NET5Udemy.Model;
 using RestWithASP_NET5Udemy.Business;
 using RestWithASP_NET5Udemy.Data.VO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestWithASP_NET5Udemy.Controllers
 {
 
     [ApiController]
     [ApiVersion("1")]
+    [Authorize("Bearer")]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class BookController : ControllerBase
     {
