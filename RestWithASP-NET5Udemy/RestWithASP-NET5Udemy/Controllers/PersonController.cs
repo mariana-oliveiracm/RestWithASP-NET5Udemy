@@ -25,15 +25,26 @@ namespace RestWithASP_NET5Udemy.Controllers
             _personBusiness = personBusiness;
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //[ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //[ProducesResponseType(401)]
+        //public IActionResult Get()
+        //{
+        //    return Ok(_personBusiness.FindAll());
+        //}
+
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
         [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] string name, string sortDirection, int pageSize, int page)
         {
-            return Ok(_personBusiness.FindAll());
+            return Ok(_personBusiness.FindWithPagedSearch(name, sortDirection, pageSize, page));
         }
+
 
         [HttpGet("{id}")]
         [ProducesResponseType((200), Type = typeof(PersonVO))]

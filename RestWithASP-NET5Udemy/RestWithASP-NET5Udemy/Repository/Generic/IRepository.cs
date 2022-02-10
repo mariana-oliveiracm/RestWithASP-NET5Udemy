@@ -13,5 +13,8 @@ namespace RestWithASP_NET5Udemy.Repository
         T Update(T item);
         void Delete(long id);
 
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
+
     }
 }
